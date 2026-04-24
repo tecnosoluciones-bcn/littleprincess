@@ -66,18 +66,22 @@
     }
     .preloader.hidden { opacity: 0; visibility: hidden; }
     .preloader__badge {
-      width: 92px;
-      height: 92px;
+      width: 138px;
+      height: 138px;
       border-radius: 50%;
       display: grid;
       place-items: center;
-      background: linear-gradient(135deg, var(--pink), var(--lilac));
-      color: var(--gold);
-      box-shadow: var(--shadow-soft);
+      background: rgba(255,255,255,.86);
+      box-shadow: 0 26px 70px rgba(217, 143, 167, .24);
       animation: pulse 1.4s infinite;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 38px;
-      font-weight: 700;
+      overflow: hidden;
+      border: 1px solid rgba(196,165,122,.25);
+    }
+    .preloader__logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
     }
     @keyframes pulse { 50% { transform: scale(1.06); } }
 
@@ -348,22 +352,7 @@
       text-transform: uppercase;
       letter-spacing: .08em;
     }
-    .product__heart {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,.82);
-      color: var(--muted);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 20px rgba(61,45,39,.1);
-    }
-    .product__heart.active { color: #d76584; }
-    .product__body { padding: 10px 18px 20px; }
+        .product__body { padding: 10px 18px 20px; }
     .product__name { min-height: 52px; font-family: "Cormorant Garamond", serif; font-weight: 700; font-size: 24px; line-height: 1.05; }
     .product__meta { margin: 14px 0 17px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
     .price { color: var(--gold); font-weight: 900; font-size: 18px; }
@@ -461,7 +450,7 @@
       transition: opacity .3s var(--ease);
     }
     .drawer-backdrop.active { opacity: 1; pointer-events: auto; }
-    .cart-drawer, .mobile-drawer {
+    .mobile-drawer {
       position: fixed;
       top: 0;
       right: 0;
@@ -475,7 +464,7 @@
       display: flex;
       flex-direction: column;
     }
-    .cart-drawer.active, .mobile-drawer.active { transform: translateX(0); }
+    .mobile-drawer.active { transform: translateX(0); }
     .drawer__head {
       display: flex;
       align-items: center;
@@ -559,6 +548,7 @@
     }
 
     @media (max-width: 560px) {
+      .preloader__badge { width: 118px; height: 118px; }
       .container { width: min(100% - 24px, 1180px); }
       .brand__mark { width: 42px; height: 42px; }
       .brand__name { font-size: 23px; }
@@ -586,21 +576,18 @@
 </head>
 
 <body>
-  <div class="preloader" id="preloader"><div class="preloader__badge">LP<div class="filters">
-            <div class="filters__title">Filtros</div>
-            <div class="filters__row">
-              <select id="filterColor"><option value="Todos">Color</option><option>Verde</option><option>Lila</option><option>Pastel</option><option>Rosa</option><option>Rojo</option></select>
-              <select id="filterSize"><option value="Todos">Tamaño</option><option>Mini</option><option>Mediano</option><option>Grande</option></select>
-              <select id="filterOccasion"><option value="Todos">Ocasión</option><option>Diario</option><option>Fiesta</option><option>Navidad</option></select>
-            </div>
-          </div></div></div>
+  <div class="preloader" id="preloader" aria-label="Cargando Little Princess">
+    <div class="preloader__badge preloader__logo">
+      <img src="logolt.png" alt="Little Princess logo">
+    </div>
+  </div>
 
   <div class="topbar">Envíos y pedidos personalizados por WhatsApp · Lazos hechos a mano</div>
 
   <header class="header">
     <div class="container nav">
       <a href="#home" class="brand" aria-label="Little Princess inicio">
-        <span class="brand__mark"><img src="logolt.png" alt="Little Princess logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+        <span class="brand__mark"><img src="logolt.png" alt="Little Princess logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></span>
         <span>
           <span class="brand__name">Little Princess</span>
           <span class="brand__sub">Handmade bows</span>
@@ -611,18 +598,13 @@
         <a href="#coleccion">Colección</a>
         <a href="#sobre-nosotros">Sobre nosotros</a>
         <a href="#opiniones">Opiniones</a>
-        
       </nav>
 
       <div class="nav__actions">
         <a class="icon-btn instagram-link" href="https://www.instagram.com/littleprincess.lazos/" target="_blank" rel="noopener" aria-label="Instagram">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
         </a>
-        <button class="icon-btn wishlist-main" id="wishlistButton" aria-label="Favoritos">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
-          <span class="wish-count" id="wishCount">0</span>
-        </button>
-        <button class="btn btn--light catalog-main-btn" id="catalogButton" aria-label="Ver en catálogo WhatsApp">
+        <button class="btn btn--light catalog-main-btn" id="catalogButton" aria-label="Ver catálogo por WhatsApp">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
           Catálogo
         </button>
@@ -643,7 +625,7 @@
           <p class="hero__text">Lazos únicos, hechos a mano con amor y cuidando cada detalle. Diseños dulces, elegantes y especiales para cada peinado.</p>
           <div class="hero__buttons">
             <a class="btn btn--dark" href="#coleccion">Ver colección <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-            <a class="btn btn--light" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener">Comprar ahora</a>
+            <a class="btn btn--light whatsapp-link" href="#">Comprar ahora</a>
           </div>
         </div>
 
@@ -664,8 +646,15 @@
             <div class="section__label">Colección destacada</div>
             <h2>Lazos para momentos especiales</h2>
           </div>
-          </div></div>
-
+          <div class="filters">
+            <div class="filters__title">Filtros</div>
+            <div class="filters__row">
+              <select id="filterColor" aria-label="Filtrar por color"><option value="Todos">Color</option><option>Verde</option><option>Lila</option><option>Pastel</option><option>Rosa</option><option>Rojo</option></select>
+              <select id="filterSize" aria-label="Filtrar por tamaño"><option value="Todos">Tamaño</option><option>Mini</option><option>Mediano</option><option>Grande</option></select>
+              <select id="filterOccasion" aria-label="Filtrar por ocasión"><option value="Todos">Ocasión</option><option>Diario</option><option>Fiesta</option><option>Navidad</option></select>
+            </div>
+          </div>
+        </div>
         <div class="products" id="productsGrid"></div>
       </div>
     </section>
@@ -707,17 +696,13 @@
       </div>
     </section>
 
-    
-
     <section class="cta">
       <div class="container">
         <div class="cta__box reveal">
           <div class="cta__script">Colección artesanal</div>
           <h2>Haz que cada peinado brille</h2>
-          <p>Elige el lazo perfecto y realiza tu pedido directamente por WhatsApp. Te ayudamos a preparar el diseño ideal.</p>
-          <a class="btn btn--gold" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener">
-            Comprar ahora
-          </a>
+          <p>Elige el lazo perfecto y solicita el catálogo directamente por WhatsApp. Te ayudamos a preparar el diseño ideal.</p>
+          <a class="btn btn--gold whatsapp-link" href="#">Comprar ahora</a>
         </div>
       </div>
     </section>
@@ -728,28 +713,16 @@
       <p>© 2026 Little Princess. Lazos infantiles artesanales.</p>
       <div class="footer__links">
         <a href="https://www.instagram.com/littleprincess.lazos/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/34691184648" target="_blank" rel="noopener">WhatsApp pedidos</a>
+        <a class="whatsapp-link" href="#">WhatsApp pedidos</a>
       </div>
     </div>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
+  <a class="whatsapp-float whatsapp-link" href="#" aria-label="Pedir por WhatsApp">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.9.66 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.31 1.85.53 2.81.66A2 2 0 0 1 22 16.92Z"/></svg>
   </a>
 
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
-
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito lateral">
-    <div class="drawer__head">
-      <div><h3>Tu carrito</h3><p>Checkout limpio por WhatsApp</p></div>
-      <button class="icon-btn" id="closeCart" aria-label="Cerrar carrito"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
-    </div>
-    <div class="cart-items" id="cartItems"></div>
-    <div class="drawer__footer">
-      <div class="total"><span>Catálogo oficial</span><span id="cartTotal">WhatsApp</span></div>
-      <a class="btn btn--dark" id="checkoutButton" href="https://wa.me/34691184648" target="_blank" rel="noopener">Finalizar pedido</a>
-    </div>
-  </aside>
 
   <aside class="mobile-drawer" id="mobileDrawer" aria-label="Menú móvil">
     <div class="drawer__head" style="padding:0 0 22px;">
@@ -760,12 +733,13 @@
       <a href="#coleccion">Colección</a>
       <a href="#sobre-nosotros">Sobre nosotros</a>
       <a href="#opiniones">Opiniones</a>
-      
     </nav>
-    <a class="btn btn--dark" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener">Comprar por WhatsApp</a>
+    <a class="btn btn--dark whatsapp-link" href="#">Comprar por WhatsApp</a>
   </aside>
 
   <script>
+    const whatsappUrl = "https://wa.me/34691184648?text=" + encodeURIComponent("Hola Little Princess, quiero ver el catálogo y hacer un pedido de lazos.");
+
     const products = [
       { id: 1, name: "Lazo Navidad Verde & Rojo", color: "Verde", size: "Grande", occasion: "Navidad", image: "2.png" },
       { id: 2, name: "Lazo Princesa Lila", color: "Lila", size: "Mediano", occasion: "Fiesta", image: "3.png" },
@@ -776,26 +750,19 @@
       { id: 7, name: "Lazo Encaje Beige", color: "Rosa", size: "Mediano", occasion: "Diario", image: "10.png" },
       { id: 8, name: "Lazo Princesa Blanco", color: "Pastel", size: "Grande", occasion: "Fiesta", image: "11.png" },
       { id: 9, name: "Pack Dulce Mini", color: "Rosa", size: "Mini", occasion: "Diario", image: "12.png" },
-      { id: 10, name: "Lazo Dorado Boutique", color: "Rojo", size: "Grande", occasion: "Fiesta", image: "13.png" }
+      { id: 10, name: "Lazo Dorado Boutique", color: "Rojo", size: "Grande", occasion: "Fiesta", image: "13.png" },
+      { id: 11, name: "Lazo Rosa Clásico", color: "Rosa", size: "Mediano", occasion: "Diario", image: "14.png" },
+      { id: 12, name: "Lazo Pastel Boutique", color: "Pastel", size: "Grande", occasion: "Fiesta", image: "15.png" },
+      { id: 13, name: "Lazo Dulce Lila", color: "Lila", size: "Mini", occasion: "Diario", image: "16.png" },
+      { id: 14, name: "Lazo Especial Princesa", color: "Pastel", size: "Grande", occasion: "Fiesta", image: "17.png" },
+      { id: 15, name: "Lazo Edición Encanto", color: "Rosa", size: "Mediano", occasion: "Diario", image: "18.png" },
+      { id: 16, name: "Lazo Sweet Princess", color: "Rosa", size: "Grande", occasion: "Fiesta", image: "19.png" }
     ];
 
-    const state = {
-      cart: [],
-      wishlist: new Set(),
-      filters: { color: "Todos", size: "Todos", occasion: "Todos" }
-    };
-
-    const formatPrice = value => value;
-    const whatsappBase = "https://wa.me/c/44036366848092";
+    const state = { filters: { color: "Todos", size: "Todos", occasion: "Todos" } };
 
     const productsGrid = document.getElementById("productsGrid");
-    const cartCount = document.getElementById("cartCount");
-    const wishCount = document.getElementById("wishCount");
-    const cartItems = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const checkoutButton = document.getElementById("checkoutButton");
     const drawerBackdrop = document.getElementById("drawerBackdrop");
-    const cartDrawer = document.getElementById("cartDrawer");
     const mobileDrawer = document.getElementById("mobileDrawer");
 
     function renderProducts() {
@@ -810,9 +777,6 @@
           <div class="product__media">
             <img src="${product.image}" alt="${product.name}">
             <span class="product__tag">${product.occasion}</span>
-            <button class="product__heart ${state.wishlist.has(product.id) ? 'active' : ''}" data-wishlist="${product.id}" aria-label="Añadir ${product.name} a favoritos">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="${state.wishlist.has(product.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
-            </button>
           </div>
           <div class="product__body">
             <h3 class="product__name">${product.name}</h3>
@@ -820,81 +784,36 @@
               <span class="price">Disponible</span>
               <span class="chip">${product.size}</span>
             </div>
-            <button class="btn btn--dark" data-add="${product.id}">Ver en catálogo</button>
+            <a class="btn btn--dark" href="${whatsappUrl}" target="_blank" rel="noopener">Ver catálogo</a>
           </div>
         </article>
       `).join("");
     }
 
-    function renderCart() {
-      const quantity = state.cart.reduce((sum, item) => sum + item.qty, 0);
-      const total = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      cartCount.textContent = quantity;
-      wishCount.textContent = state.wishlist.size;
-      cartTotal.textContent = formatPrice(total);
-
-      if (!state.cart.length) {
-        cartItems.innerHTML = `<div class="cart-empty"><div><strong>Tu carrito está vacío.</strong><br>Elige tus lazos favoritos para preparar el pedido.</div></div>`;
-        checkoutButton.href = `${whatsappBase}${encodeURIComponent("Hola Little Princess, quiero hacer un pedido de lazos infantiles.")}`;
-        return;
-      }
-
-      cartItems.innerHTML = state.cart.map(item => `
-        <div class="cart-item">
-          <img src="${item.image}" alt="${item.name}">
-          <div>
-            <h4>${item.name}</h4>
-            <p>${item.qty} unidad${item.qty > 1 ? 'es' : ''}</p>
-          </div>
-          <button class="remove" data-remove="${item.id}" aria-label="Quitar ${item.name}">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-          </button>
-        </div>
-      `).join("");
-
-      const orderLines = state.cart.map(item => `- ${item.name} x${item.qty} (${formatPrice(item.price * item.qty)})`).join("\n");
-      checkoutButton.href = whatsappBase;
+    function closeDrawers() {
+      drawerBackdrop.classList.remove("active");
+      mobileDrawer.classList.remove("active");
     }
 
-    function addToCart(id) {
-      const product = products.find(item => item.id === id);
-      const existing = state.cart.find(item => item.id === id);
-      if (existing) existing.qty += 1;
-      else state.cart.push({ ...product, qty: 1 });
-      renderCart();
-      openCart();
+    function openMenu() {
+      drawerBackdrop.classList.add("active");
+      mobileDrawer.classList.add("active");
     }
 
-    function toggleWishlist(id) {
-      state.wishlist.has(id) ? state.wishlist.delete(id) : state.wishlist.add(id);
-      renderProducts();
-      renderCart();
-    }
-
-    function removeFromCart(id) {
-      state.cart = state.cart.filter(item => item.id !== id);
-      renderCart();
-    }
-
-    function openCart() { window.open("https://wa.me/c/44036366848092", "_blank"); }
-    function closeDrawers() { drawerBackdrop.classList.remove("active"); cartDrawer.classList.remove("active"); mobileDrawer.classList.remove("active"); }
-    function openMenu() { drawerBackdrop.classList.add("active"); mobileDrawer.classList.add("active"); }
-
-    document.addEventListener("click", event => {
-      const addId = event.target.closest("[data-add]")?.dataset.add;
-      const wishId = event.target.closest("[data-wishlist]")?.dataset.wishlist;
-      const removeId = event.target.closest("[data-remove]")?.dataset.remove;
-      if (addId) addToCart(Number(addId));
-      if (wishId) toggleWishlist(Number(wishId));
-      if (removeId) removeFromCart(Number(removeId));
-      if (event.target.closest(".mobile-drawer nav a")) closeDrawers();
-    });
-
-    document.getElementById("catalogButton").addEventListener("click", () => window.open("https://wa.me/c/44036366848092", "_blank"));
-    document.getElementById("closeCart").addEventListener("click", closeDrawers);
+    document.getElementById("catalogButton").addEventListener("click", () => window.open(whatsappUrl, "_blank"));
     document.getElementById("menuButton").addEventListener("click", openMenu);
     document.getElementById("closeMenu").addEventListener("click", closeDrawers);
     drawerBackdrop.addEventListener("click", closeDrawers);
+
+    document.querySelectorAll(".whatsapp-link").forEach(link => {
+      link.href = whatsappUrl;
+      link.target = "_blank";
+      link.rel = "noopener";
+    });
+
+    document.addEventListener("click", event => {
+      if (event.target.closest(".mobile-drawer nav a")) closeDrawers();
+    });
 
     ["filterColor", "filterSize", "filterOccasion"].forEach(id => {
       document.getElementById(id).addEventListener("change", event => {
@@ -913,11 +832,10 @@
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
     window.addEventListener("load", () => {
-      setTimeout(() => document.getElementById("preloader").classList.add("hidden"), 450);
+      setTimeout(() => document.getElementById("preloader").classList.add("hidden"), 700);
     });
 
     renderProducts();
-    renderCart();
   </script>
 </body>
 </html>
