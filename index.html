@@ -586,7 +586,14 @@
 </head>
 
 <body>
-  <div class="preloader" id="preloader"><div class="preloader__badge">LP</div></div>
+  <div class="preloader" id="preloader"><div class="preloader__badge">LP<div class="filters">
+            <div class="filters__title">Filtros</div>
+            <div class="filters__row">
+              <select id="filterColor"><option value="Todos">Color</option><option>Verde</option><option>Lila</option><option>Pastel</option><option>Rosa</option><option>Rojo</option></select>
+              <select id="filterSize"><option value="Todos">Tamaño</option><option>Mini</option><option>Mediano</option><option>Grande</option></select>
+              <select id="filterOccasion"><option value="Todos">Ocasión</option><option>Diario</option><option>Fiesta</option><option>Navidad</option></select>
+            </div>
+          </div></div></div>
 
   <div class="topbar">Envíos y pedidos personalizados por WhatsApp · Lazos hechos a mano</div>
 
@@ -615,7 +622,7 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
           <span class="wish-count" id="wishCount">0</span>
         </button>
-        <button class="btn btn--light catalog-main-btn" id="catalogButton" aria-label="Ver catálogo WhatsApp">
+        <button class="btn btn--light catalog-main-btn" id="catalogButton" aria-label="Ver en catálogo WhatsApp">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
           Catálogo
         </button>
@@ -654,8 +661,8 @@
       <div class="container">
         <div class="section__head reveal">
           <div>
-            <div class="section__label">Catálogo Little Princess</div>
-            <h2>Nuestros lazos favoritos</h2>
+            <div class="section__label">Colección destacada</div>
+            <h2>Lazos para momentos especiales</h2>
           </div>
           </div></div>
 
@@ -795,7 +802,12 @@
       { id: 2, name: "Lazo Princesa Lila", color: "Lila", size: "Mediano", occasion: "Fiesta", image: "3.png" },
       { id: 3, name: "Lazo Arcoíris Pastel", color: "Pastel", size: "Grande", occasion: "Diario", image: "4.png" },
       { id: 4, name: "Pack Mini Lazos", color: "Rosa", size: "Mini", occasion: "Diario", image: "5.png" },
-      { id: 5, name: "Lazo Satén Rojo", color: "Rojo", size: "Mediano", occasion: "Fiesta", image: "6.png" }
+      { id: 5, name: "Lazo Satén Rojo", color: "Rojo", size: "Mediano", occasion: "Fiesta", image: "6.png" },
+      { id: 6, name: "Lazo Perla Rosa", color: "Rosa", size: "Grande", occasion: "Fiesta", image: "9.png" },
+      { id: 7, name: "Lazo Encaje Beige", color: "Rosa", size: "Mediano", occasion: "Diario", image: "10.png" },
+      { id: 8, name: "Lazo Princesa Blanco", color: "Pastel", size: "Grande", occasion: "Fiesta", image: "11.png" },
+      { id: 9, name: "Pack Dulce Mini", color: "Rosa", size: "Mini", occasion: "Diario", image: "12.png" },
+      { id: 10, name: "Lazo Dorado Boutique", color: "Rojo", size: "Grande", occasion: "Fiesta", image: "13.png" }
     ];
 
     const state = {
@@ -836,10 +848,10 @@
           <div class="product__body">
             <h3 class="product__name">${product.name}</h3>
             <div class="product__meta">
-              <span class="price">Hecho a mano</span>
+              <span class="price">Disponible</span>
               <span class="chip">${product.size}</span>
             </div>
-            <button class="btn btn--dark" data-add="${product.id}">Ver catálogo</button>
+            <button class="btn btn--dark" data-add="${product.id}">Ver en catálogo</button>
           </div>
         </article>
       `).join("");
