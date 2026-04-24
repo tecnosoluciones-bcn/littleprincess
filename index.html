@@ -1,1 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Little Princess - Lazos infantiles artesanales para las más pequeñas de la casa." />
+  <title>Little Princess | Lazos infantiles artesanales</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=Parisienne&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #fffaf5;
+      --white: #ffffff;
+      --beige: #efe1d1;
+      --beige-2: #f8efe6;
+      --pink: #f4d6df;
+      --pink-2: #d98fa7;
+      --lilac: #e9def9;
+      --gold: #c4a57a;
+      --gold-soft: #f0dca8;
+      --brown: #6f5a50;
+      --muted: #806a60;
+      --line: rgba(185, 140, 45, .18);
+      --shadow: 0 24px 70px rgba(61, 45, 39, .12);
+      --shadow-soft: 0 14px 38px rgba(217, 154, 170, .18);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+      --ease: cubic-bezier(.22, 1, .36, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--brown);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(247, 220, 231, .75), transparent 28%),
+        radial-gradient(circle at 88% 24%, rgba(233, 222, 249, .8), transparent 28%),
+        radial-gradient(circle at 54% 92%, rgba(240, 220, 168, .45), transparent 28%),
+        var(--cream);
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, select { font: inherit; }
+    button { cursor: pointer; border: 0; background: none; }
+
+    .container { width: min(1180px, calc(100% - 32px)); margin-inline: auto; }
+    .serif { font-family: "Cormorant Garamond", serif; }
+    .script { font-family: "Parisienne", cursive; }
+    .gold { color: var(--gold); }
+
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      background: var(--cream);
+      transition: opacity .5s var(--ease), visibility .5s var(--ease);
+    }
+    .preloader.hidden { opacity: 0; visibility: hidden; }
+    .preloader__badge {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--pink), var(--lilac));
+      color: var(--gold);
+      box-shadow: var(--shadow-soft);
+      animation: pulse 1.4s infinite;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 38px;
+      font-weight: 700;
+    }
+    @keyframes pulse { 50% { transform: scale(1.06); } }
+
+    .topbar {
+      background: linear-gradient(90deg, var(--brown), #6a4c54, var(--gold));
+      color: rgba(255,255,255,.92);
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px 16px;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(239, 225, 209, .8);
+      background: rgba(255, 250, 245, .84);
+      backdrop-filter: blur(18px);
+    }
+    .nav {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 14px; }
+    .brand__mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--pink), var(--lilac));
+      color: var(--gold);
+      box-shadow: 0 12px 30px rgba(185, 140, 45, .16);
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 800;
+      font-size: 22px;
+    }
+    .brand__name { font-family: "Cormorant Garamond", serif; font-size: 27px; line-height: .95; font-weight: 700; }
+    .brand__sub { margin-top: 5px; font-size: 10px; text-transform: uppercase; letter-spacing: .28em; color: var(--gold); font-weight: 700; }
+
+    .nav__links { display: flex; align-items: center; gap: 30px; color: var(--muted); font-weight: 700; font-size: 14px; }
+    .nav__links a { position: relative; }
+    .nav__links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--gold);
+      transition: width .3s var(--ease);
+    }
+    .nav__links a:hover::after { width: 100%; }
+
+    .nav__actions { display: flex; align-items: center; gap: 12px; }
+    .icon-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      color: var(--brown);
+      box-shadow: 0 8px 24px rgba(61,45,39,.06);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), color .25s var(--ease);
+      position: relative;
+    }
+    .icon-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(61,45,39,.1); color: var(--gold); }
+    .cart-count, .wish-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--pink-2);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding-inline: 5px;
+    }
+    .menu-btn { display: none; }
+
+    .hero {
+      position: relative;
+      padding: 92px 0 74px;
+    }
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      border-radius: var(--radius-pill);
+      padding: 10px 16px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 28px rgba(61,45,39,.06);
+    }
+    .eyebrow span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--pink-2);
+      box-shadow: 0 0 0 6px rgba(233,174,190,.22);
+    }
+    .hero h1 {
+      margin-top: 24px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(68px, 9vw, 124px);
+      line-height: .82;
+      letter-spacing: -.055em;
+    }
+    .hero__slogan {
+      margin-top: 22px;
+      font-family: "Parisienne", cursive;
+      color: var(--gold);
+      font-size: clamp(34px, 4vw, 56px);
+      line-height: 1.1;
+    }
+    .hero__text {
+      margin-top: 24px;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.9;
+    }
+    .hero__buttons { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 0 26px;
+      border-radius: var(--radius-pill);
+      font-weight: 800;
+      letter-spacing: -.01em;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn--dark { background: var(--brown); color: white; box-shadow: 0 22px 38px rgba(61,45,39,.18); }
+    .btn--dark:hover { background: #2c211d; }
+    .btn--light { background: white; color: var(--gold); border: 1px solid rgba(185,140,45,.28); box-shadow: 0 18px 34px rgba(185,140,45,.12); }
+    .btn--gold { background: linear-gradient(135deg, #cfa94d, var(--gold)); color: white; box-shadow: 0 20px 40px rgba(185,140,45,.22); }
+
+    .hero__visual { position: relative; }
+    .hero__card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 54px;
+      padding: 12px;
+      background: rgba(255,255,255,.78);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,.9);
+    }
+    .hero__card img {
+      height: 600px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 44px;
+      filter: saturate(1.04) contrast(1.02);
+    }
+    .float-card {
+      position: absolute;
+      z-index: 2;
+      border: 1px solid rgba(255,255,255,.8);
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      padding: 18px 22px;
+      box-shadow: var(--shadow-soft);
+    }
+    .float-card--top { left: -20px; top: 34px; }
+    .float-card--bottom { right: -14px; bottom: 34px; background: rgba(247,220,231,.82); }
+    .float-card small { color: var(--muted); font-weight: 800; text-transform: uppercase; letter-spacing: .16em; font-size: 10px; }
+    .float-card strong { display: block; margin-top: 4px; font-family: "Cormorant Garamond", serif; font-size: 28px; line-height: 1; }
+
+    .section { padding: 92px 0; }
+    .section__head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 38px;
+    }
+    .section__label { color: var(--gold); text-transform: uppercase; letter-spacing: .28em; font-size: 12px; font-weight: 900; margin-bottom: 12px; }
+    .section h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(42px, 5vw, 68px); line-height: .94; letter-spacing: -.035em; }
+
+    .filters {
+      min-width: 430px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      border-radius: 28px;
+      padding: 16px;
+      box-shadow: 0 16px 40px rgba(61,45,39,.07);
+    }
+    .filters__title { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--muted); font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .filters__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .filters select {
+      width: 100%;
+      border: 1px solid rgba(185,140,45,.22);
+      background: var(--cream);
+      border-radius: var(--radius-pill);
+      color: var(--brown);
+      padding: 12px 13px;
+      outline: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .filters select:focus { border-color: var(--pink-2); }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .product {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 10px 28px rgba(61,45,39,.06);
+      transition: transform .32s var(--ease), box-shadow .32s var(--ease);
+    }
+    .product:hover { transform: translateY(-8px); box-shadow: var(--shadow-soft); }
+    .product__media {
+      position: relative;
+      margin: 10px;
+      height: 245px;
+      border-radius: 26px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--pink), var(--lilac));
+    }
+    .product__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+    .product:hover .product__media img { transform: scale(1.08); }
+    .product__tag {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(255,255,255,.8);
+      backdrop-filter: blur(10px);
+      padding: 7px 11px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .product__heart {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.82);
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(61,45,39,.1);
+    }
+    .product__heart.active { color: #d76584; }
+    .product__body { padding: 10px 18px 20px; }
+    .product__name { min-height: 52px; font-family: "Cormorant Garamond", serif; font-weight: 700; font-size: 24px; line-height: 1.05; }
+    .product__meta { margin: 14px 0 17px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .price { color: var(--gold); font-weight: 900; font-size: 18px; }
+    .chip { border-radius: var(--radius-pill); background: var(--beige-2); color: var(--muted); padding: 7px 10px; font-size: 12px; font-weight: 800; }
+    .product .btn { width: 100%; min-height: 48px; font-size: 13px; }
+
+    .about-card {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 48px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 54px;
+      background: rgba(255,255,255,.72);
+      box-shadow: var(--shadow-soft);
+      padding: 38px;
+      overflow: hidden;
+    }
+    .about__images { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .about__images img { height: 365px; width: 100%; object-fit: cover; border-radius: 34px; box-shadow: 0 18px 34px rgba(61,45,39,.08); }
+    .about__images img:nth-child(2) { margin-top: 52px; }
+    .about p { margin-top: 22px; color: var(--muted); line-height: 1.9; font-size: 18px; }
+    .about__features { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 30px; }
+    .feature { border-radius: 24px; background: var(--cream); padding: 22px 12px; text-align: center; box-shadow: 0 8px 22px rgba(61,45,39,.05); }
+    .feature svg { color: var(--gold); margin-bottom: 10px; }
+    .feature strong { display: block; font-family: "Cormorant Garamond", serif; font-size: 24px; }
+
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .review {
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: rgba(255,255,255,.78);
+      padding: 28px;
+      box-shadow: 0 12px 28px rgba(61,45,39,.06);
+    }
+    .stars { display: flex; gap: 4px; color: #d5a02d; margin-bottom: 16px; }
+    .review p { color: var(--muted); line-height: 1.8; }
+    .review strong { display: block; margin-top: 20px; font-family: "Cormorant Garamond", serif; font-size: 24px; }
+
+    .gallery {
+      column-count: 3;
+      column-gap: 18px;
+    }
+    .gallery img {
+      width: 100%;
+      break-inside: avoid;
+      margin-bottom: 18px;
+      object-fit: cover;
+      border-radius: 32px;
+      box-shadow: 0 18px 36px rgba(61,45,39,.09);
+      transition: transform .32s var(--ease), filter .32s var(--ease);
+    }
+    .gallery img:hover { transform: translateY(-5px); filter: saturate(1.1); }
+    .gallery img:nth-child(odd) { height: 420px; }
+    .gallery img:nth-child(even) { height: 330px; }
+
+    .cta {
+      padding: 104px 0;
+    }
+    .cta__box {
+      position: relative;
+      overflow: hidden;
+      border-radius: 56px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(247,220,231,.32), transparent 30%),
+        radial-gradient(circle at 85% 35%, rgba(240,220,168,.38), transparent 28%),
+        linear-gradient(135deg, var(--brown), #74505a 58%, var(--gold));
+      color: white;
+      text-align: center;
+      padding: 72px 28px;
+      box-shadow: 0 30px 80px rgba(61,45,39,.22);
+    }
+    .cta__box h2 { font-family: "Cormorant Garamond", serif; font-size: clamp(48px, 6vw, 84px); line-height: .92; letter-spacing: -.04em; }
+    .cta__box p { margin: 20px auto 32px; max-width: 640px; color: rgba(255,255,255,.82); line-height: 1.8; }
+    .cta__script { font-family: "Parisienne", cursive; color: #ffdfe8; font-size: 36px; margin-bottom: 10px; }
+
+    .footer {
+      border-top: 1px solid rgba(239,225,209,.9);
+      padding: 38px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer__row { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .footer__links { display: flex; gap: 20px; font-weight: 800; }
+    .footer__links a:hover { color: var(--gold); }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(61,45,39,.38);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s var(--ease);
+    }
+    .drawer-backdrop.active { opacity: 1; pointer-events: auto; }
+    .cart-drawer, .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 201;
+      height: 100dvh;
+      width: min(440px, 100%);
+      background: var(--cream);
+      box-shadow: -30px 0 70px rgba(61,45,39,.18);
+      transform: translateX(104%);
+      transition: transform .42s var(--ease);
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-drawer.active, .mobile-drawer.active { transform: translateX(0); }
+    .drawer__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px;
+      border-bottom: 1px solid rgba(239,225,209,.9);
+    }
+    .drawer__head h3 { font-family: "Cormorant Garamond", serif; font-size: 38px; line-height: 1; }
+    .drawer__head p { margin-top: 5px; color: var(--muted); font-size: 13px; }
+    .cart-items { flex: 1; overflow: auto; padding: 22px; display: grid; align-content: start; gap: 14px; }
+    .cart-empty { height: 100%; display: grid; place-items: center; text-align: center; color: var(--muted); line-height: 1.7; }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 24px;
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(61,45,39,.06);
+    }
+    .cart-item img { width: 92px; height: 92px; object-fit: cover; border-radius: 18px; }
+    .cart-item h4 { font-family: "Cormorant Garamond", serif; font-size: 21px; line-height: 1.05; }
+    .cart-item p { margin-top: 6px; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .remove { color: var(--muted); padding: 8px; }
+    .remove:hover { color: #c45c73; }
+    .drawer__footer { border-top: 1px solid rgba(239,225,209,.9); padding: 22px; }
+    .total { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; font-family: "Cormorant Garamond", serif; font-size: 30px; font-weight: 700; }
+    .drawer__footer .btn { width: 100%; }
+
+    .mobile-drawer { padding: 24px; gap: 26px; }
+    .mobile-drawer nav { display: grid; gap: 18px; font-family: "Cormorant Garamond", serif; font-size: 32px; }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 90;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #25d366;
+      color: white;
+      box-shadow: 0 20px 38px rgba(37,211,102,.28);
+      transition: transform .25s var(--ease);
+    }
+    .whatsapp-float:hover { transform: translateY(-4px) scale(1.03); }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .75s var(--ease), transform .75s var(--ease); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1120px) {
+      .products { grid-template-columns: repeat(3, 1fr); }
+      .hero__grid { grid-template-columns: 1fr; }
+      .hero__card img { height: 520px; }
+    }
+
+    @media (max-width: 860px) {
+      .topbar { font-size: 11px; }
+      .nav { height: 74px; }
+      .nav__links, .nav__actions .instagram-link, .nav__actions .wishlist-main { display: none; }
+      .menu-btn { display: grid; }
+      .hero { padding: 54px 0 50px; }
+      .hero__grid { gap: 44px; }
+      .hero__card { border-radius: 38px; }
+      .hero__card img { height: 430px; border-radius: 30px; }
+      .float-card--top { left: 10px; top: 18px; }
+      .float-card--bottom { right: 10px; bottom: 18px; }
+      .section { padding: 64px 0; }
+      .section__head { display: grid; }
+      .filters { min-width: 0; width: 100%; }
+      .filters__row { grid-template-columns: 1fr; }
+      .products { grid-template-columns: 1fr 1fr; }
+      .about-card { grid-template-columns: 1fr; padding: 20px; border-radius: 38px; }
+      .reviews { grid-template-columns: 1fr; }
+      .gallery { column-count: 2; }
+      .footer__row { flex-direction: column; align-items: start; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 24px, 1180px); }
+      .brand__mark { width: 42px; height: 42px; }
+      .brand__name { font-size: 23px; }
+      .hero h1 { font-size: 74px; }
+      .hero__slogan { font-size: 36px; }
+      .hero__text { font-size: 16px; }
+      .hero__buttons .btn { width: 100%; }
+      .hero__card img { height: 390px; }
+      .float-card { padding: 14px 16px; border-radius: 22px; }
+      .float-card strong { font-size: 23px; }
+      .products { grid-template-columns: 1fr; }
+      .product__media { height: 310px; }
+      .about__images { gap: 12px; }
+      .about__images img { height: 260px; border-radius: 24px; }
+      .about__images img:nth-child(2) { margin-top: 36px; }
+      .about__features { grid-template-columns: 1fr; }
+      .gallery { column-count: 1; }
+      .gallery img:nth-child(odd), .gallery img:nth-child(even) { height: 360px; }
+      .cta { padding: 64px 0; }
+      .cta__box { border-radius: 38px; padding: 52px 20px; }
+      .cart-item { grid-template-columns: 78px 1fr auto; }
+      .cart-item img { width: 78px; height: 78px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="preloader" id="preloader"><div class="preloader__badge">LP</div></div>
+
+  <div class="topbar">Envíos y pedidos personalizados por WhatsApp · Lazos hechos a mano</div>
+
+  <header class="header">
+    <div class="container nav">
+      <a href="#home" class="brand" aria-label="Little Princess inicio">
+        <span class="brand__mark"><img src="logolt.png" alt="Little Princess logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+        <span>
+          <span class="brand__name">Little Princess</span>
+          <span class="brand__sub">Handmade bows</span>
+        </span>
+      </a>
+
+      <nav class="nav__links" aria-label="Menú principal">
+        <a href="#coleccion">Colección</a>
+        <a href="#sobre-nosotros">Sobre nosotros</a>
+        <a href="#opiniones">Opiniones</a>
+        <a href="#galeria">Galería</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="icon-btn instagram-link" href="https://www.instagram.com/littleprincess.lazos/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></svg>
+        </a>
+        <button class="icon-btn wishlist-main" id="wishlistButton" aria-label="Favoritos">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+          <span class="wish-count" id="wishCount">0</span>
+        </button>
+        <button class="icon-btn" id="catalogButton" aria-label="Ver catálogo WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-count">+</span>
+        </button>
+        <button class="icon-btn menu-btn" id="menuButton" aria-label="Abrir menú">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content reveal">
+          <div class="eyebrow"><span></span> Boutique infantil elegante</div>
+          <h1>Little Princess</h1>
+          <div class="hero__slogan">Para las más pequeñas de la casa</div>
+          <p class="hero__text">Lazos únicos, hechos a mano con amor y cuidando cada detalle. Diseños dulces, elegantes y especiales para cada peinado.</p>
+          <div class="hero__buttons">
+            <a class="btn btn--dark" href="#coleccion">Ver colección <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
+            <a class="btn btn--light" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener">Comprar ahora</a>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal">
+          <div class="float-card float-card--top"><small>Little Princess</small><strong>Diseño artesanal</strong></div>
+          <div class="hero__card">
+            <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1400&q=90" alt="Lazos infantiles Little Princess">
+          </div>
+          <div class="float-card float-card--bottom"><small>Colores oficiales</small><strong>Rosa · Blanco · Beige</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="coleccion">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <div class="section__label">Colección destacada</div>
+            <h2>Lazos para momentos especiales</h2>
+          </div>
+          <div class="filters">
+            <div class="filters__title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M2 14h4"/><path d="M10 8h4"/><path d="M18 16h4"/></svg>
+              Filtros
+            </div>
+            <div class="filters__row">
+              <select id="filterColor" aria-label="Filtrar por color">
+                <option value="Todos">Color</option><option>Verde</option><option>Lila</option><option>Pastel</option><option>Rosa</option><option>Rojo</option>
+              </select>
+              <select id="filterSize" aria-label="Filtrar por tamaño">
+                <option value="Todos">Tamaño</option><option>Mini</option><option>Mediano</option><option>Grande</option>
+              </select>
+              <select id="filterOccasion" aria-label="Filtrar por ocasión">
+                <option value="Todos">Ocasión</option><option>Diario</option><option>Fiesta</option><option>Navidad</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="products" id="productsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section about" id="sobre-nosotros">
+      <div class="container">
+        <div class="about-card reveal">
+          <div class="about__images">
+            <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=85" alt="Detalle artesanal de lazo infantil">
+            <img src="https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=800&q=85" alt="Accesorios infantiles boutique">
+          </div>
+          <div>
+            <div class="section__label">Sobre nosotros</div>
+            <h2>Pequeños detalles, grandes recuerdos</h2>
+            <p>En Little Princess diseñamos lazos artesanales pensados para resaltar la dulzura y personalidad de cada niña. Cada pieza está hecha con dedicación y materiales de calidad.</p>
+            <div class="about__features">
+              <div class="feature"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg><strong>Artesanal</strong></div>
+              <div class="feature"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg><strong>Delicado</strong></div>
+              <div class="feature"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="m2 12 20 0"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/></svg><strong>Premium</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="opiniones">
+      <div class="container">
+        <div class="section__head reveal" style="justify-content:center;text-align:center;">
+          <div>
+            <div class="section__label">Opiniones de clientas</div>
+            <h2>Amor a primera vista</h2>
+          </div>
+        </div>
+        <div class="reviews reveal">
+          <article class="review"><div class="stars">★★★★★</div><p>“Preciosos, delicados y con un acabado muy cuidado. Mi hija no se los quiere quitar.”</p><strong>María G.</strong></article>
+          <article class="review"><div class="stars">★★★★★</div><p>“El pedido llegó perfecto. Se nota que están hechos a mano con mucho cariño.”</p><strong>Laura P.</strong></article>
+          <article class="review"><div class="stars">★★★★★</div><p>“Compré varios para regalar y fueron un acierto. Muy elegantes y diferentes.”</p><strong>Sandra R.</strong></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="container">
+        <div class="section__head reveal">
+          <div>
+            <div class="section__label">Galería</div>
+            <h2>Inspiración estilo Instagram</h2>
+          </div>
+          <a class="btn btn--light" href="https://www.instagram.com/littleprincess.lazos/" target="_blank" rel="noopener">@littleprincess.lazos</a>
+        </div>
+        <div class="gallery reveal">
+          <img src="1.png" alt="Little Princess 1">
+          <img src="2.png" alt="Little Princess 2">
+          <img src="3.png" alt="Little Princess 3">
+          <img src="4.png" alt="Little Princess 4">
+          <img src="5.png" alt="Little Princess 5">
+          <img src="6.png" alt="Little Princess 6">
+          <img src="7.png" alt="Little Princess 7">
+          <img src="8.png" alt="Little Princess 8">
+          <img src="9.png" alt="Little Princess 9">
+          <img src="10.png" alt="Little Princess 10">
+          <img src="11.png" alt="Little Princess 11">
+          <img src="12.png" alt="Little Princess 12">
+          <img src="13.png" alt="Little Princess 13">
+          <img src="14.png" alt="Little Princess 14">
+          <img src="15.png" alt="Little Princess 15">
+          <img src="16.png" alt="Little Princess 16">
+          <img src="17.png" alt="Little Princess 17">
+          <img src="18.png" alt="Little Princess 18">
+          <img src="19.png" alt="Little Princess 19">
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta__box reveal">
+          <div class="cta__script">Colección artesanal</div>
+          <h2>Haz que cada peinado brille</h2>
+          <p>Elige el lazo perfecto y realiza tu pedido directamente por WhatsApp. Te ayudamos a preparar el diseño ideal.</p>
+          <a class="btn btn--gold" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener">
+            Comprar ahora
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <p>© 2026 Little Princess. Lazos infantiles artesanales.</p>
+      <div class="footer__links">
+        <a href="https://www.instagram.com/littleprincess.lazos/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/34691184648" target="_blank" rel="noopener">WhatsApp pedidos</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.9.66 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.31 1.85.53 2.81.66A2 2 0 0 1 22 16.92Z"/></svg>
+  </a>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito lateral">
+    <div class="drawer__head">
+      <div><h3>Tu carrito</h3><p>Checkout limpio por WhatsApp</p></div>
+      <button class="icon-btn" id="closeCart" aria-label="Cerrar carrito"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="drawer__footer">
+      <div class="total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+      <a class="btn btn--dark" id="checkoutButton" href="https://wa.me/34691184648" target="_blank" rel="noopener">Finalizar pedido</a>
+    </div>
+  </aside>
+
+  <aside class="mobile-drawer" id="mobileDrawer" aria-label="Menú móvil">
+    <div class="drawer__head" style="padding:0 0 22px;">
+      <div><h3>Menú</h3><p>Little Princess</p></div>
+      <button class="icon-btn" id="closeMenu" aria-label="Cerrar menú"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+    </div>
+    <nav>
+      <a href="#coleccion">Colección</a>
+      <a href="#sobre-nosotros">Sobre nosotros</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#galeria">Galería</a>
+    </nav>
+    <a class="btn btn--dark" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener">Comprar por WhatsApp</a>
+  </aside>
+
+  <script>
+    const products = [
+      { id: 1, name: "Lazo Navidad Verde & Rojo", price: 8.95, color: "Verde", size: "Grande", occasion: "Navidad", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=85" },
+      { id: 2, name: "Lazo Princesa Lila", price: 7.95, color: "Lila", size: "Mediano", occasion: "Fiesta", image: "https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?auto=format&fit=crop&w=900&q=85" },
+      { id: 3, name: "Lazo Arcoíris Pastel", price: 9.50, color: "Pastel", size: "Grande", occasion: "Diario", image: "https://images.unsplash.com/photo-1522771930-78848d9293e8?auto=format&fit=crop&w=900&q=85" },
+      { id: 4, name: "Pack Mini Lazos", price: 12.95, color: "Rosa", size: "Mini", occasion: "Diario", image: "https://images.unsplash.com/photo-1604014238170-4def1e4e6fcf?auto=format&fit=crop&w=900&q=85" },
+      { id: 5, name: "Lazo Satén Rojo", price: 8.50, color: "Rojo", size: "Mediano", occasion: "Fiesta", image: "https://images.unsplash.com/photo-1513245543132-31f507417b26?auto=format&fit=crop&w=900&q=85" }
+    ];
+
+    const state = {
+      cart: [],
+      wishlist: new Set(),
+      filters: { color: "Todos", size: "Todos", occasion: "Todos" }
+    };
+
+    const formatPrice = value => `${value.toFixed(2).replace('.', ',')} €`;
+    const whatsappBase = "https://wa.me/34691184648?text=";
+
+    const productsGrid = document.getElementById("productsGrid");
+    const cartCount = document.getElementById("cartCount");
+    const wishCount = document.getElementById("wishCount");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const checkoutButton = document.getElementById("checkoutButton");
+    const drawerBackdrop = document.getElementById("drawerBackdrop");
+    const cartDrawer = document.getElementById("cartDrawer");
+    const mobileDrawer = document.getElementById("mobileDrawer");
+
+    function renderProducts() {
+      const filtered = products.filter(product => {
+        return (state.filters.color === "Todos" || product.color === state.filters.color)
+          && (state.filters.size === "Todos" || product.size === state.filters.size)
+          && (state.filters.occasion === "Todos" || product.occasion === state.filters.occasion);
+      });
+
+      productsGrid.innerHTML = filtered.map(product => `
+        <article class="product reveal visible">
+          <div class="product__media">
+            <img src="${product.image}" alt="${product.name}">
+            <span class="product__tag">${product.occasion}</span>
+            <button class="product__heart ${state.wishlist.has(product.id) ? 'active' : ''}" data-wishlist="${product.id}" aria-label="Añadir ${product.name} a favoritos">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="${state.wishlist.has(product.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
+            </button>
+          </div>
+          <div class="product__body">
+            <h3 class="product__name">${product.name}</h3>
+            <div class="product__meta">
+              <span class="price">${formatPrice(product.price)}</span>
+              <span class="chip">${product.size}</span>
+            </div>
+            <button class="btn btn--dark" data-add="${product.id}">Añadir al carrito</button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function renderCart() {
+      const quantity = state.cart.reduce((sum, item) => sum + item.qty, 0);
+      const total = state.cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      cartCount.textContent = quantity;
+      wishCount.textContent = state.wishlist.size;
+      cartTotal.textContent = formatPrice(total);
+
+      if (!state.cart.length) {
+        cartItems.innerHTML = `<div class="cart-empty"><div><strong>Tu carrito está vacío.</strong><br>Elige tus lazos favoritos para preparar el pedido.</div></div>`;
+        checkoutButton.href = `${whatsappBase}${encodeURIComponent("Hola Little Princess, quiero hacer un pedido de lazos infantiles.")}`;
+        return;
+      }
+
+      cartItems.innerHTML = state.cart.map(item => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}">
+          <div>
+            <h4>${item.name}</h4>
+            <p>${item.qty} unidad${item.qty > 1 ? 'es' : ''} · ${formatPrice(item.price * item.qty)}</p>
+          </div>
+          <button class="remove" data-remove="${item.id}" aria-label="Quitar ${item.name}">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+          </button>
+        </div>
+      `).join("");
+
+      const orderLines = state.cart.map(item => `- ${item.name} x${item.qty} (${formatPrice(item.price * item.qty)})`).join("\n");
+      const message = `Hola Little Princess, quiero hacer este pedido:\n${orderLines}\nTotal aproximado: ${formatPrice(total)}`;
+      checkoutButton.href = `${whatsappBase}${encodeURIComponent(message)}`;
+    }
+
+    function addToCart(id) {
+      const product = products.find(item => item.id === id);
+      const existing = state.cart.find(item => item.id === id);
+      if (existing) existing.qty += 1;
+      else state.cart.push({ ...product, qty: 1 });
+      renderCart();
+      openCart();
+    }
+
+    function toggleWishlist(id) {
+      state.wishlist.has(id) ? state.wishlist.delete(id) : state.wishlist.add(id);
+      renderProducts();
+      renderCart();
+    }
+
+    function removeFromCart(id) {
+      state.cart = state.cart.filter(item => item.id !== id);
+      renderCart();
+    }
+
+    function openCart() { window.open("https://wa.me/c/44036366848092", "_blank"); }
+    function closeDrawers() { drawerBackdrop.classList.remove("active"); cartDrawer.classList.remove("active"); mobileDrawer.classList.remove("active"); }
+    function openMenu() { drawerBackdrop.classList.add("active"); mobileDrawer.classList.add("active"); }
+
+    document.addEventListener("click", event => {
+      const addId = event.target.closest("[data-add]")?.dataset.add;
+      const wishId = event.target.closest("[data-wishlist]")?.dataset.wishlist;
+      const removeId = event.target.closest("[data-remove]")?.dataset.remove;
+      if (addId) addToCart(Number(addId));
+      if (wishId) toggleWishlist(Number(wishId));
+      if (removeId) removeFromCart(Number(removeId));
+      if (event.target.closest(".mobile-drawer nav a")) closeDrawers();
+    });
+
+    document.getElementById("catalogButton").addEventListener("click", () => window.open("https://wa.me/c/44036366848092", "_blank"));
+    document.getElementById("closeCart").addEventListener("click", closeDrawers);
+    document.getElementById("menuButton").addEventListener("click", openMenu);
+    document.getElementById("closeMenu").addEventListener("click", closeDrawers);
+    drawerBackdrop.addEventListener("click", closeDrawers);
+
+    ["filterColor", "filterSize", "filterOccasion"].forEach(id => {
+      document.getElementById(id).addEventListener("change", event => {
+        const key = id.replace("filter", "").toLowerCase();
+        state.filters[key] = event.target.value;
+        renderProducts();
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    window.addEventListener("load", () => {
+      setTimeout(() => document.getElementById("preloader").classList.add("hidden"), 450);
+    });
+
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>
