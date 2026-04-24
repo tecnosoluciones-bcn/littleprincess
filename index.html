@@ -539,7 +539,7 @@
     @media (max-width: 860px) {
       .topbar { font-size: 11px; }
       .nav { height: 74px; }
-      .nav__links, .nav__actions .instagram-link, .nav__actions .wishlist-main { display: none; }
+      .nav__links, .nav__actions .instagram-link, .nav__actions .wishlist-main, .catalog-main-btn { display: none; }
       .menu-btn { display: grid; }
       .hero { padding: 54px 0 50px; }
       .hero__grid { gap: 44px; }
@@ -615,9 +615,9 @@
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>
           <span class="wish-count" id="wishCount">0</span>
         </button>
-        <button class="icon-btn" id="catalogButton" aria-label="Ver catálogo WhatsApp">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span class="cart-count">+</span>
+        <button class="btn btn--light catalog-main-btn" id="catalogButton" aria-label="Ver catálogo WhatsApp">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+          Catálogo
         </button>
         <button class="icon-btn menu-btn" id="menuButton" aria-label="Abrir menú">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16"/><path d="M4 6h16"/><path d="M4 18h16"/></svg>
@@ -636,7 +636,7 @@
           <p class="hero__text">Lazos únicos, hechos a mano con amor y cuidando cada detalle. Diseños dulces, elegantes y especiales para cada peinado.</p>
           <div class="hero__buttons">
             <a class="btn btn--dark" href="#coleccion">Ver colección <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></a>
-            <a class="btn btn--light" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener">Comprar ahora</a>
+            <a class="btn btn--light" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener">Comprar ahora</a>
           </div>
         </div>
 
@@ -654,27 +654,10 @@
       <div class="container">
         <div class="section__head reveal">
           <div>
-            <div class="section__label">Colección destacada</div>
-            <h2>Lazos para momentos especiales</h2>
+            <div class="section__label">Catálogo Little Princess</div>
+            <h2>Nuestros lazos favoritos</h2>
           </div>
-          <div class="filters">
-            <div class="filters__title">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M2 14h4"/><path d="M10 8h4"/><path d="M18 16h4"/></svg>
-              Filtros
-            </div>
-            <div class="filters__row">
-              <select id="filterColor" aria-label="Filtrar por color">
-                <option value="Todos">Color</option><option>Verde</option><option>Lila</option><option>Pastel</option><option>Rosa</option><option>Rojo</option>
-              </select>
-              <select id="filterSize" aria-label="Filtrar por tamaño">
-                <option value="Todos">Tamaño</option><option>Mini</option><option>Mediano</option><option>Grande</option>
-              </select>
-              <select id="filterOccasion" aria-label="Filtrar por ocasión">
-                <option value="Todos">Ocasión</option><option>Diario</option><option>Fiesta</option><option>Navidad</option>
-              </select>
-            </div>
-          </div>
-        </div>
+          </div></div>
 
         <div class="products" id="productsGrid"></div>
       </div>
@@ -756,7 +739,7 @@
           <div class="cta__script">Colección artesanal</div>
           <h2>Haz que cada peinado brille</h2>
           <p>Elige el lazo perfecto y realiza tu pedido directamente por WhatsApp. Te ayudamos a preparar el diseño ideal.</p>
-          <a class="btn btn--gold" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener">
+          <a class="btn btn--gold" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener">
             Comprar ahora
           </a>
         </div>
@@ -774,7 +757,7 @@
     </div>
   </footer>
 
-  <a class="whatsapp-float" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.35 1.9.66 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.31 1.85.53 2.81.66A2 2 0 0 1 22 16.92Z"/></svg>
   </a>
 
@@ -787,7 +770,7 @@
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="drawer__footer">
-      <div class="total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+      <div class="total"><span>Catálogo oficial</span><span id="cartTotal">WhatsApp</span></div>
       <a class="btn btn--dark" id="checkoutButton" href="https://wa.me/34691184648" target="_blank" rel="noopener">Finalizar pedido</a>
     </div>
   </aside>
@@ -803,16 +786,16 @@
       <a href="#opiniones">Opiniones</a>
       <a href="#galeria">Galería</a>
     </nav>
-    <a class="btn btn--dark" href="https://wa.me/34691184648?text=Hola%20Little%20Princess%2C%20quiero%20hacer%20un%20pedido%20de%20lazos%20infantiles." target="_blank" rel="noopener">Comprar por WhatsApp</a>
+    <a class="btn btn--dark" href="https://wa.me/c/44036366848092" target="_blank" rel="noopener">Comprar por WhatsApp</a>
   </aside>
 
   <script>
     const products = [
-      { id: 1, name: "Lazo Navidad Verde & Rojo", price: 8.95, color: "Verde", size: "Grande", occasion: "Navidad", image: "2.png" },
-      { id: 2, name: "Lazo Princesa Lila", price: 7.95, color: "Lila", size: "Mediano", occasion: "Fiesta", image: "3.png" },
-      { id: 3, name: "Lazo Arcoíris Pastel", price: 9.50, color: "Pastel", size: "Grande", occasion: "Diario", image: "4.png" },
-      { id: 4, name: "Pack Mini Lazos", price: 12.95, color: "Rosa", size: "Mini", occasion: "Diario", image: "5.png" },
-      { id: 5, name: "Lazo Satén Rojo", price: 8.50, color: "Rojo", size: "Mediano", occasion: "Fiesta", image: "6.png" }
+      { id: 1, name: "Lazo Navidad Verde & Rojo", color: "Verde", size: "Grande", occasion: "Navidad", image: "2.png" },
+      { id: 2, name: "Lazo Princesa Lila", color: "Lila", size: "Mediano", occasion: "Fiesta", image: "3.png" },
+      { id: 3, name: "Lazo Arcoíris Pastel", color: "Pastel", size: "Grande", occasion: "Diario", image: "4.png" },
+      { id: 4, name: "Pack Mini Lazos", color: "Rosa", size: "Mini", occasion: "Diario", image: "5.png" },
+      { id: 5, name: "Lazo Satén Rojo", color: "Rojo", size: "Mediano", occasion: "Fiesta", image: "6.png" }
     ];
 
     const state = {
@@ -821,8 +804,8 @@
       filters: { color: "Todos", size: "Todos", occasion: "Todos" }
     };
 
-    const formatPrice = value => `${value.toFixed(2).replace('.', ',')} €`;
-    const whatsappBase = "https://wa.me/34691184648?text=";
+    const formatPrice = value => value;
+    const whatsappBase = "https://wa.me/c/44036366848092";
 
     const productsGrid = document.getElementById("productsGrid");
     const cartCount = document.getElementById("cartCount");
@@ -853,10 +836,10 @@
           <div class="product__body">
             <h3 class="product__name">${product.name}</h3>
             <div class="product__meta">
-              <span class="price">${formatPrice(product.price)}</span>
+              <span class="price">Hecho a mano</span>
               <span class="chip">${product.size}</span>
             </div>
-            <button class="btn btn--dark" data-add="${product.id}">Añadir al carrito</button>
+            <button class="btn btn--dark" data-add="${product.id}">Ver catálogo</button>
           </div>
         </article>
       `).join("");
@@ -880,7 +863,7 @@
           <img src="${item.image}" alt="${item.name}">
           <div>
             <h4>${item.name}</h4>
-            <p>${item.qty} unidad${item.qty > 1 ? 'es' : ''} · ${formatPrice(item.price * item.qty)}</p>
+            <p>${item.qty} unidad${item.qty > 1 ? 'es' : ''}</p>
           </div>
           <button class="remove" data-remove="${item.id}" aria-label="Quitar ${item.name}">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
@@ -889,8 +872,7 @@
       `).join("");
 
       const orderLines = state.cart.map(item => `- ${item.name} x${item.qty} (${formatPrice(item.price * item.qty)})`).join("\n");
-      const message = `Hola Little Princess, quiero hacer este pedido:\n${orderLines}\nTotal aproximado: ${formatPrice(total)}`;
-      checkoutButton.href = `${whatsappBase}${encodeURIComponent(message)}`;
+      checkoutButton.href = whatsappBase;
     }
 
     function addToCart(id) {
